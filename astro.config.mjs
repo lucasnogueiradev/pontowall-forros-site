@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://pontowallforros.com.br',
+  site: 'https://forros.pontowallforros.com.br',
   integrations: [mdx(), sitemap()],
   i18n: {
     locale: 'pt-BR',
