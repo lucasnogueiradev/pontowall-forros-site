@@ -208,6 +208,11 @@ section {
   color: white;
 }
 
+.btn-lg {
+  font-size: 1.15rem;
+  padding: 1rem 2.5rem;
+}
+
 .btn-outline {
   background: transparent;
   color: var(--primary);
@@ -544,6 +549,18 @@ section {
 /* ---- RESPONSIVE ---- */
 @media (max-width: 768px) {
   section { padding: 3rem 0; }
+  
+  .btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+  }
+  
+  .btn-lg {
+    font-size: 1rem;
+    padding: 0.85rem 1.5rem;
+    white-space: normal;
+    text-align: center;
+  }
 
   .form-grid {
     grid-template-columns: 1fr;
