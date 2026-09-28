@@ -2,85 +2,382 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import { WHATSAPP_URL, SITE_URL } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "image": heroImage?.src ? `${SITE_URL}${heroImage.src}` : undefined,
+  "datePublished": pubDate.toISOString(),
+  "dateModified": (updatedDate || pubDate).toISOString(),
+  "author": {
+    "@type": "Organization",
+    "name": "Pontowall Forros"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Pontowall Forros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/logo.webp`
+    }
+  }
+});
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<html lang="pt-BR">
+  <head>
+    <BaseHead
+      title={`${title} | Pontowall Forros`}
+      description={description}
+      image={heroImage?.src}
+      type="article"
+    />
+    <script type="application/ld+json" set:html={articleSchema} />
+    <style>
+      .post-hero {
+        background: var(--primary);
+        padding: 4rem 0 2rem;
+      }
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+      .post-hero-inner {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .post-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .post-back:hover { color: white; }
+
+      .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+
+      .post-date {
+        color: rgba(255,255,255,0.65);
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .post-reading {
+        background: rgba(255,255,255,0.1);
+        color: rgba(255,255,255,0.8);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .post-hero h1 {
+        color: white;
+        font-size: clamp(1.6rem, 4vw, 2.5rem);
+        line-height: 1.25;
+        margin: 0;
+      }
+
+      .post-hero-img {
+        width: 100%;
+        max-width: 900px;
+        margin: 2.5rem auto 0;
+        display: block;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        max-height: 480px;
+        object-fit: cover;
+      }
+
+      /* Article Layout */
+      .article-wrap {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      }
+
+      /* Prose styles */
+      .prose h2 {
+        font-size: 1.55rem;
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--border);
+      }
+
+      .prose h3 {
+        font-size: 1.2rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        color: var(--primary);
+      }
+
+      .prose p { margin-bottom: 1.4em; }
+
+      .prose ul, .prose ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5em;
+      }
+
+      .prose li { margin-bottom: 0.4em; }
+
+      .prose a {
+        color: var(--primary);
+        text-decoration: underline;
+        font-weight: 500;
+      }
+
+      .prose strong { color: var(--dark); }
+
+      .prose blockquote {
+        background: rgba(22,83,173,0.05);
+        border-left: 4px solid var(--primary);
+        padding: 1rem 1.5rem;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        margin: 1.5rem 0;
+        font-style: italic;
+      }
+
+      .prose table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.92rem;
+      }
+
+      .prose th {
+        background: var(--primary);
+        color: white;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-weight: 600;
+      }
+
+      .prose td {
+        padding: 0.65rem 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .prose tr:nth-child(even) td {
+        background: var(--bg-light);
+      }
+
+      /* CTA Box dentro do post */
+      .post-cta-box {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        border-radius: var(--radius-xl);
+        padding: 2.5rem;
+        text-align: center;
+        margin: 3rem 0;
+        color: white;
+      }
+
+      .post-cta-box h3 {
+        color: white;
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .post-cta-box p {
+        color: rgba(255,255,255,0.85);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Sidebar de navegação */
+      .article-sidebar {
+        position: sticky;
+        top: 80px;
+        padding: 1.5rem;
+        background: var(--bg-light);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+      }
+
+      .article-sidebar h4 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+      }
+
+      .sidebar-link {
+        display: block;
+        padding: 0.4rem 0;
+        font-size: 0.88rem;
+        color: var(--text-main);
+        text-decoration: none;
+        border-left: 2px solid transparent;
+        padding-left: 0.75rem;
+        transition: var(--transition);
+        line-height: 1.5;
+      }
+
+      .sidebar-link:hover {
+        color: var(--primary);
+        border-left-color: var(--primary);
+      }
+
+      .article-layout {
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: 3rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      @media (max-width: 900px) {
+        .article-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .article-sidebar { display: none; }
+      }
+
+      @media (max-width: 768px) {
+        .post-hero {
+          padding-top: 6rem; /* Aumentado de 4rem para descolar do topo */
+        }
+        
+        .post-hero h1 {
+          font-size: 1.35rem; /* Menor no mobile */
+          line-height: 1.3;
+        }
+
+        .post-hero-img {
+          margin-top: 1.5rem;
+        }
+
+        .prose h2 {
+          font-size: 1.35rem;
+          margin-top: 2rem;
+        }
+      }
+
+      /* Updated date */
+      .updated-note {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        font-style: italic;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <!-- Post Hero -->
+      <div class="post-hero">
+        <div class="post-hero-inner">
+          <a href="/blog" class="post-back">
+            <i class="fas fa-arrow-left"></i> Voltar ao Blog
+          </a>
+          <div class="post-meta">
+            <span class="badge">Forro de Isopor</span>
+            <time class="post-date" datetime={pubDate.toISOString()}>
+              <i class="fas fa-calendar-alt"></i>
+              <FormattedDate date={pubDate} />
+            </time>
+            <span class="post-reading">
+              <i class="fas fa-clock"></i> ~5 min de leitura
+            </span>
+          </div>
+          <h1>{title}</h1>
+        </div>
+
+        {heroImage && (
+          <Image
+            class="post-hero-img"
+            width={900}
+            height={450}
+            src={heroImage}
+            alt={title}
+          />
+        )}
+      </div>
+
+      <!-- Article -->
+      <div style="padding: 0 0 4rem;">
+        <div class="article-layout">
+          <!-- Content -->
+          <article>
+            {updatedDate && (
+              <p class="updated-note">
+                <i class="fas fa-sync-alt"></i>
+                Atualizado em <FormattedDate date={updatedDate} />
+              </p>
+            )}
+
+            <div class="prose">
+              <slot />
+            </div>
+
+            <!-- CTA dentro do post -->
+            <div class="post-cta-box">
+              <h3>Pronto para instalar forro no seu espaço?</h3>
+              <p>Orçamento 100% gratuito e sem compromisso. Atendemos São Paulo e Grande SP.</p>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+                <i class="fab fa-whatsapp"></i> Solicitar Orçamento Grátis
+              </a>
+            </div>
+          </article>
+
+          <!-- Sidebar -->
+          <aside class="article-sidebar">
+            <h4>Links Úteis</h4>
+            <a href="/#servicos" class="sidebar-link">
+              <i class="fas fa-th-large"></i> Nossos Serviços
+            </a>
+            <a href="/blog" class="sidebar-link">
+              <i class="fas fa-newspaper"></i> Outros Artigos
+            </a>
+            <a href="/#faq" class="sidebar-link">
+              <i class="fas fa-question-circle"></i> Perguntas Frequentes
+            </a>
+            <a href="/#contato" class="sidebar-link">
+              <i class="fas fa-envelope"></i> Solicitar Orçamento
+            </a>
+
+            <div style="margin-top: 2rem; padding: 1.25rem; background: var(--primary); border-radius: var(--radius-md); text-align: center;">
+              <p style="color: white; font-size: 0.88rem; margin-bottom: 1rem;">
+                <strong>Orçamento Grátis</strong><br/>
+                Resposta em minutos
+              </p>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%; justify-content:center; font-size:0.88rem; padding:0.65rem 1rem;">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
 </html>

@@ -1,114 +1,483 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_TITLE, WHATSAPP_URL, SITE_URL } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const featuredPost = posts[0];
+const otherPosts = posts.slice(1);
+
+const blogSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blog sobre Forro de Isopor | Pontowall Forros",
+  "description": "Artigos especializados sobre forro de isopor, drywall e instalação de forros em São Paulo.",
+  "url": `${SITE_URL}/blog`,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Pontowall Forros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/logo.webp`
+    }
+  }
+});
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+<html lang="pt-BR">
+  <head>
+    <BaseHead
+      title="Blog sobre Forro de Isopor e Instalação | Pontowall Forros"
+      description="Artigos especializados sobre forro de isopor, drywall e instalação de forros em São Paulo. Preços, dicas, comparativos e guias completos para sua obra."
+    />
+    <script type="application/ld+json" set:html={blogSchema} />
+    <style>
+      /* HERO DO BLOG */
+      .blog-hero {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+        padding: 4rem 0 5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .blog-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      .blog-hero-inner {
+        position: relative;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .blog-hero-inner .badge {
+        background: rgba(255,255,255,0.15);
+        color: white;
+        border-color: rgba(255,255,255,0.3);
+        margin-bottom: 1rem;
+      }
+
+      .blog-hero h1 {
+        color: white;
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 1rem;
+      }
+
+      .blog-hero p {
+        color: rgba(255,255,255,0.8);
+        font-size: 1.1rem;
+        margin-bottom: 0;
+      }
+
+      /* FEATURED POST */
+      .featured-post-card {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 0;
+        background: white;
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        box-shadow: var(--shadow-xl);
+        border: 1px solid var(--border);
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
+        margin-bottom: 4rem;
+      }
+
+      .featured-post-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+        color: inherit;
+      }
+
+      .featured-img {
+        position: relative;
+        overflow: hidden;
+        min-height: 380px;
+      }
+
+      .featured-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+        transition: transform 0.6s ease;
+      }
+
+      .featured-post-card:hover .featured-img img {
+        transform: scale(1.05);
+      }
+
+      .featured-label {
+        position: absolute;
+        top: 1.25rem;
+        left: 1.25rem;
+        background: var(--secondary);
+        color: white;
+        padding: 0.3rem 0.9rem;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        z-index: 1;
+      }
+
+      .featured-body {
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .featured-date {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .featured-body h2 {
+        font-size: 1.7rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+        color: var(--dark);
+      }
+
+      .featured-body p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .featured-read-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.92rem;
+        transition: var(--transition);
+      }
+
+      .featured-post-card:hover .featured-read-more {
+        gap: 0.9rem;
+      }
+
+      /* POSTS GRID */
+      .posts-section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .posts-section-title::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.75rem;
+      }
+
+      .post-card {
+        background: white;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        transition: var(--transition);
+      }
+
+      .post-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-xl);
+        border-color: transparent;
+        color: inherit;
+      }
+
+      .post-card-img {
+        height: 200px;
+        overflow: hidden;
+        background: var(--bg-gray);
+        position: relative;
+      }
+
+      .post-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+        transition: transform 0.5s ease;
+      }
+
+      .post-card:hover .post-card-img img {
+        transform: scale(1.06);
+      }
+
+      .no-img-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .no-img-placeholder i {
+        font-size: 3rem;
+        color: rgba(255,255,255,0.3);
+      }
+
+      .post-card-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.6rem;
+      }
+
+      .post-card-date {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .post-card-title {
+        font-size: 1.05rem;
+        color: var(--dark);
+        line-height: 1.4;
+        font-weight: 700;
+      }
+
+      .post-card-desc {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        flex: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .post-card-link {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-top: 0.5rem;
+        transition: var(--transition);
+      }
+
+      .post-card:hover .post-card-link {
+        gap: 0.75rem;
+      }
+
+      /* CTA section */
+      .blog-cta {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        border-radius: var(--radius-xl);
+        padding: 3rem;
+        text-align: center;
+        margin-top: 4rem;
+        color: white;
+      }
+
+      .blog-cta h3 {
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .blog-cta p {
+        color: rgba(255,255,255,0.8);
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+      }
+
+      /* EMPTY STATE */
+      .empty-blog {
+        text-align: center;
+        padding: 5rem 1.5rem;
+        color: var(--text-muted);
+      }
+
+      .empty-blog i {
+        font-size: 4rem;
+        color: var(--border);
+        margin-bottom: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .featured-post-card {
+          grid-template-columns: 1fr;
+        }
+
+        .featured-img {
+          min-height: 220px;
+        }
+
+        .featured-body {
+          padding: 1.75rem;
+        }
+
+        .featured-body h2 { font-size: 1.35rem; }
+      }
+
+      @media (max-width: 480px) {
+        .posts-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+
+    <!-- Hero -->
+    <div class="blog-hero">
+      <div class="blog-hero-inner">
+        <div class="badge">Blog Pontowall Forros</div>
+        <h1>Dicas e Informações sobre Forro de Isopor</h1>
+        <p>Artigos especializados para você tomar a melhor decisão na sua obra em São Paulo.</p>
+      </div>
+    </div>
+
+    <main style="padding: 3rem 0 5rem; background: var(--bg-light);">
+      <div class="container">
+
+        {posts.length === 0 ? (
+          <div class="empty-blog">
+            <i class="fas fa-newspaper"></i>
+            <h2>Em breve, novos artigos!</h2>
+            <p>Estamos preparando conteúdo especializado sobre forro de isopor e instalação em São Paulo.</p>
+          </div>
+        ) : (
+          <>
+            <!-- Post em destaque -->
+            {featuredPost && (
+              <a href={`/blog/${featuredPost.id}/`} class="featured-post-card">
+                <div class="featured-img">
+                  <span class="featured-label"> Destaque</span>
+                  {featuredPost.data.heroImage ? (
+                    <img
+                      src={featuredPost.data.heroImage.src}
+                      alt={featuredPost.data.title}
+                      width="600"
+                      height="400"
+                      loading="eager"
+                    />
+                  ) : (
+                    <div class="no-img-placeholder">
+                      <i class="fas fa-newspaper"></i>
+                    </div>
+                  )}
+                </div>
+                <div class="featured-body">
+                  <time class="featured-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <FormattedDate date={featuredPost.data.pubDate} />
+                  </time>
+                  <h2>{featuredPost.data.title}</h2>
+                  <p>{featuredPost.data.description}</p>
+                  <span class="featured-read-more">
+                    Ler artigo completo <i class="fas fa-arrow-right"></i>
+                  </span>
+                </div>
+              </a>
+            )}
+
+            <!-- Outros posts -->
+            {otherPosts.length > 0 && (
+              <>
+                <div class="posts-section-title">
+                  <i class="fas fa-newspaper" style="color: var(--primary);"></i>
+                  Mais Artigos
+                </div>
+                <div class="posts-grid">
+                  {otherPosts.map(post => (
+                    <a href={`/blog/${post.id}/`} class="post-card">
+                      <div class="post-card-img">
+                        {post.data.heroImage ? (
+                          <img
+                            src={post.data.heroImage.src}
+                            alt={post.data.title}
+                            width="400"
+                            height="200"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div class="no-img-placeholder">
+                            <i class="fas fa-newspaper"></i>
+                          </div>
+                        )}
+                      </div>
+                      <div class="post-card-body">
+                        <time class="post-card-date">
+                          <i class="fas fa-calendar-alt"></i>
+                          <FormattedDate date={post.data.pubDate} />
+                        </time>
+                        <h3 class="post-card-title">{post.data.title}</h3>
+                        <p class="post-card-desc">{post.data.description}</p>
+                        <span class="post-card-link">
+                          Ler artigo <i class="fas fa-arrow-right"></i>
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+
+            <!-- CTA -->
+            <div class="blog-cta">
+              <h3>Pronto para instalar forro no seu espaço?</h3>
+              <p>Nossa equipe atende São Paulo e Grande SP. Orçamento 100% gratuito!</p>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+                <i class="fab fa-whatsapp"></i> Solicitar Orçamento Grátis
+              </a>
+            </div>
+          </>
+        )}
+      </div>
+    </main>
+
+    <Footer />
+  </body>
 </html>

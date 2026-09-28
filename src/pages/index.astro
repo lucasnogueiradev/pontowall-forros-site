@@ -1,49 +1,1260 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, WHATSAPP_URL, WHATSAPP_NUMBER } from '../consts';
+import imgForro1 from '../assets/forro1.webp';
+import imgForro2 from '../assets/forro2.webp';
+import imgForro3 from '../assets/forro3.webp';
+import imgHeroBlog from '../assets/hero-blog.webp';
+import imgForroEps from '../assets/forro-eps.webp';
+import imgForro4 from '../assets/forro4.webp';
+
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://pontowallforros.com.br/#organization",
+  "name": "Pontowall Forros",
+  "image": "https://pontowallforros.com.br/logo.webp",
+  "url": "https://pontowallforros.com.br",
+  "telephone": "+5511947651322",
+  "priceRange": "$$",
+  "description": "Instalação de forro de isopor com material e mão de obra inclusa em São Paulo. A partir de R$ 49/m².",
+  "areaServed": [
+    {"@type": "City", "name": "São Paulo"},
+    {"@type": "City", "name": "Guarulhos"},
+    {"@type": "City", "name": "Santo André"},
+    {"@type": "City", "name": "São Bernardo do Campo"},
+    {"@type": "City", "name": "Osasco"}
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Deli, 163",
+    "addressLocality": "São Paulo",
+    "addressRegion": "SP",
+    "postalCode": "03563-320",
+    "addressCountry": "BR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -23.5817,
+    "longitude": -46.5743
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "08:00",
+    "closes": "18:00"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "34",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+};
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your{' '}
-				<code>astro.config.mjs</code> file. You can customize your setup with{' '}
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to{' '}
-				<a href="https://docs.astro.build/">read the docs</a>{' '}
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out{' '}
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>{' '}
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<html lang="pt-BR">
+  <head>
+    <BaseHead
+      title="Forro de Isopor com Instalação em SP | A partir de R$ 49/m² | Pontowall Forros"
+      description="Instalação de forro de isopor com material e mão de obra inclusa em São Paulo e Grande SP. A partir de R$ 49/m². Serviço rápido, limpo e com laudo de segurança. Orçamento grátis!"
+      image="/og-home.png"
+    />
+
+    <!-- JSON-LD LocalBusiness -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+
+    <!-- JSON-LD FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qual o valor para instalar forro de isopor em SP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trabalhamos com excelente custo-benefício a partir de R$ 49,00 o metro quadrado, com material e instalação inclusa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo leva a instalação de forro de isopor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Um espaço de até 50m² é concluído em apenas 1 dia. Galpões de 500m² a 2.000m² são entregues em poucos dias com equipes múltiplas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O orçamento é gratuito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim! O orçamento é 100% gratuito e sem compromisso. Solicite pelo WhatsApp enviando as medidas do ambiente."
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <Header />
+
+    <main id="home">
+
+      <!-- ═══════════════ HERO MODERN ═══════════════ -->
+      <section class="modern-hero" id="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge"> Referência em São Paulo</div>
+            <h1>Forro de Isopor <span>Instalado e Material</span></h1>
+            <p class="hero-subtitle">Esqueça o calor excessivo e o barulho. Tenha o melhor custo-benefício para sua obra com material de alta densidade e mão de obra especializada. <strong>A partir de R$ 49/m²</strong>.</p>
+            
+            <div class="hero-actions">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="btn btn-whatsapp hero-btn">
+                <i class="fab fa-whatsapp"></i> Fazer Orçamento Agora
+              </a>
+              <div class="hero-trust-badges">
+                <span><i class="fas fa-check-circle"></i> Visita Grátis</span>
+                <span><i class="fas fa-check-circle"></i> Laudo e ART</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-image-wrapper">
+            <img src="/hero-forro-isopor.webp" alt="Instalação de Forro de Isopor" class="hero-modern-img" />
+            <div class="hero-price-tag">
+              <span>Instalação Completa</span>
+              <strong>R$ 49/m²</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ═══════════════ DIFERENCIAIS ═══════════════ -->
+      <section class="diferenciais-bar">
+        <div class="container">
+          <div class="diff-grid">
+            <div class="diff-item">
+              <i class="fas fa-bolt"></i>
+              <div>
+                <strong>Instalação Rápida</strong>
+                <span>Até 50m² em 1 dia</span>
+              </div>
+            </div>
+            <div class="diff-item">
+              <i class="fas fa-broom"></i>
+              <div>
+                <strong>Serviço Limpo</strong>
+                <span>Mínimo de resíduos</span>
+              </div>
+            </div>
+            <div class="diff-item">
+              <i class="fas fa-file-contract"></i>
+              <div>
+                <strong>Laudos e NRs</strong>
+                <span>Documentação completa</span>
+              </div>
+            </div>
+            <div class="diff-item">
+              <i class="fas fa-receipt"></i>
+              <div>
+                <strong>Nota Fiscal CNPJ</strong>
+                <span>Faturamento empresarial</span>
+              </div>
+            </div>
+            <div class="diff-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <strong>SP e Grande SP</strong>
+                <span>Atendimento regional</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ SOBRE ═══════════════ -->
+      <section id="sobre" class="sobre-section">
+        <div class="container">
+          <div class="grid-2" style="align-items:center; gap: 4rem;">
+            <div class="sobre-text">
+              <div class="badge">Especialistas B2B</div>
+              <h2>19 Anos de Experiência em Grandes Obras</h2>
+              <p>
+                A <strong>Pontowall Forros</strong> é especializada em instalação de forro de isopor e sistemas removíveis
+                para o setor comercial e industrial em São Paulo. Atendemos grandes metragens com equipes altamente
+                qualificadas e em conformidade com as Normas de Segurança (NRs).
+              </p>
+              <p>
+                Ideal para <strong>galpões logísticos, igrejas, hospitais, supermercados</strong> e qualquer
+                ambiente que exija isolamento térmico e acústico de alto desempenho com rapidez de execução.
+              </p>
+              <div class="sobre-stats">
+                <div class="stat-box">
+                  <span class="stat-num">19+</span>
+                  <span class="stat-lbl">Anos de Experiência</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num">500+</span>
+                  <span class="stat-lbl">Obras Realizadas</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-num">5,0</span>
+                  <span class="stat-lbl">Avaliação no Google</span>
+                </div>
+              </div>
+              <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="btn btn-primary">
+                  <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="#servicos" class="btn btn-outline">
+                  <i class="fas fa-th-large"></i> Nossos Serviços
+                </a>
+              </div>
+            </div>
+            <div class="sobre-img-wrap">
+              <img
+                src="/about.webp"
+                alt="Equipe Pontowall Forros em instalação de forro de isopor"
+                loading="lazy"
+                class="sobre-img"
+              />
+              <div class="sobre-badge-float">
+                <i class="fas fa-hard-hat"></i>
+                Equipe Certificada NR-35
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ SERVIÇOS ═══════════════ -->
+      <section id="servicos" style="background: var(--bg-gray);">
+        <div class="container">
+          <div class="section-header">
+            <div class="badge">Nossos Serviços</div>
+            <h2>Soluções Profissionais de Forro</h2>
+            <p>Material de alta tecnologia com instalação completa. Rápido, limpo e com garantia.</p>
+          </div>
+
+          <div class="servicos-grid">
+            <!-- Card 1: Forro Isopor -->
+            <div class="servico-card featured">
+              <div class="servico-icon">
+                <i class="fas fa-industry"></i>
+              </div>
+              <div class="servico-badge">Mais Pedido</div>
+              <h3>Forro de Isopor (EPS)</h3>
+              <p>
+                Forro modular removível em poliestireno expandido (EPS). Leve, de encaixe rápido e
+                com excelente isolamento térmico. Ideal para galpões, igrejas e supermercados.
+              </p>
+              <ul class="servico-list">
+                <li><i class="fas fa-check-circle"></i> Placas modulares 625x625mm</li>
+                <li><i class="fas fa-check-circle"></i> Isolamento térmico eficiente</li>
+                <li><i class="fas fa-check-circle"></i> Instalação ultrarrápida</li>
+                <li><i class="fas fa-check-circle"></i> Acesso fácil à cobertura</li>
+                <li><i class="fas fa-check-circle"></i> A partir de R$ 49/m²</li>
+              </ul>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%2C%20vim%20pelo%20site!%20Quero%20or%C3%A7amento%20para%20forro%20de%20isopor`}
+                target="_blank" rel="noopener" class="btn btn-whatsapp" style="width:100%;justify-content:center;margin-top:auto;"
+              >
+                <i class="fab fa-whatsapp"></i> Solicitar Orçamento
+              </a>
+            </div>
+
+            <!-- Card 2: Fibra Mineral -->
+            <div class="servico-card">
+              <div class="servico-icon">
+                <i class="fas fa-building"></i>
+              </div>
+              <h3>Forro Fibra Mineral</h3>
+              <p>
+                Alta absorção sonora e resistência ao fogo. Perfeito para hospitais, clínicas,
+                escritórios corporativos e ambientes que exigem controle acústico rigoroso.
+              </p>
+              <ul class="servico-list">
+                <li><i class="fas fa-check-circle"></i> Alta absorção acústica</li>
+                <li><i class="fas fa-check-circle"></i> Resistente a umidade</li>
+                <li><i class="fas fa-check-circle"></i> Padrão para hospitais</li>
+                <li><i class="fas fa-check-circle"></i> Estética premium</li>
+              </ul>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%2C%20vim%20pelo%20site!%20Quero%20or%C3%A7amento%20para%20forro%20fibra%20mineral`}
+                target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:auto;"
+              >
+                <i class="fas fa-paper-plane"></i> Solicitar Orçamento
+              </a>
+            </div>
+
+            <!-- Card 3: Drywall -->
+            <div class="servico-card">
+              <div class="servico-icon">
+                <i class="fas fa-drafting-compass"></i>
+              </div>
+              <h3>Forro Drywall</h3>
+              <p>
+                Construção a seco para forros rebaixados e lisos em gesso acartonado.
+                Montagem ágil com excelente isolamento termoacústico para escritórios e salas.
+              </p>
+              <ul class="servico-list">
+                <li><i class="fas fa-check-circle"></i> Instalação limpa e rápida</li>
+                <li><i class="fas fa-check-circle"></i> Chapas RF (Resistente ao Fogo)</li>
+                <li><i class="fas fa-check-circle"></i> Acabamento liso p/ pintura</li>
+                <li><i class="fas fa-check-circle"></i> Passa fiações facilmente</li>
+              </ul>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%2C%20vim%20pelo%20site!%20Quero%20or%C3%A7amento%20para%20forro%20drywall`}
+                target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:auto;"
+              >
+                <i class="fas fa-paper-plane"></i> Solicitar Orçamento
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ PROJETOS ═══════════════ -->
+      <section id="projetos" style="background:white;">
+        <div class="container">
+          <div class="section-header">
+            <div class="badge">Portfólio</div>
+            <h2>Nossos Projetos</h2>
+            <p>Confira a qualidade do nosso acabamento em obras realizadas em São Paulo.</p>
+          </div>
+
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <img src={imgForro1.src} alt="Instalação de forro de isopor em galpão logístico SP" loading="lazy" />
+            </div>
+            <div class="gallery-item">
+              <img src={imgForro2.src} alt="Forro removível em supermercado São Paulo" loading="lazy" />
+            </div>
+            <div class="gallery-item">
+              <img src={imgForro3.src} alt="Forro de isopor em igreja Zona Leste SP" loading="lazy" />
+            </div>
+            <div class="gallery-item">
+              <img src={imgHeroBlog.src} alt="Instalação de forro drywall escritório SP" loading="lazy" />
+            </div>
+            <div class="gallery-item">
+              <img src={imgForroEps.src} alt="Drywall hospitalar São Paulo" loading="lazy" />
+            </div>
+            <div class="gallery-item">
+              <img src={imgForro4.src} alt="Forro fibra mineral hospital São Paulo" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="text-center" style="margin-top:3rem;">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+              <i class="fab fa-whatsapp"></i> Quero um Orçamento para Minha Obra
+            </a>
+          </div>
+        </div>
+      </section>
+
+      
+
+
+
+      <!-- ═══════════════ FAQ ═══════════════ -->
+      <section id="faq" style="background: var(--bg-light);">
+        <div class="container">
+          <div class="section-header">
+            <div class="badge">Dúvidas Frequentes</div>
+            <h2>Perguntas Frequentes sobre Forro de Isopor</h2>
+            <p>Tire suas dúvidas antes de contratar nossos serviços.</p>
+          </div>
+
+          <div class="faq-list">
+            <div class="faq-item" id="faq-1">
+              <button class="faq-question" onclick="toggleFaq('faq-1')">
+                <span>Qual o valor para instalar forro de isopor em SP?</span>
+                <i class="fas fa-chevron-down icon"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Trabalhamos com excelente custo-benefício, com opções <strong>a partir de R$ 49,00 o metro quadrado</strong>,
+                  incluindo material e mão de obra. Mais do que preço, nosso diferencial é o serviço rápido,
+                  limpo e seguro (com laudo e ART), para que sua obra não atrase.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item" id="faq-2">
+              <button class="faq-question" onclick="toggleFaq('faq-2')">
+                <span>Quanto tempo leva a instalação de forro de isopor?</span>
+                <i class="fas fa-chevron-down icon"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Para ambientes menores (até 50m²), a instalação é concluída em apenas 1 dia.
+                  Para obras maiores de 500m² a 2.000m², montamos frentes de trabalho paralelas
+                  para entregar em tempo recorde, sem parar a operação do local.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item" id="faq-3">
+              <button class="faq-question" onclick="toggleFaq('faq-3')">
+                <span>O forro de isopor é adequado para galpões e igrejas?</span>
+                <i class="fas fa-chevron-down icon"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Sim! O forro de isopor é a solução mais popular para galpões logísticos por seu
+                  custo acessível e excelente isolamento térmico. Para igrejas, recomendamos combinar
+                  com forro de fibra mineral para melhor acústica. Avaliamos cada projeto individualmente.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item" id="faq-4">
+              <button class="faq-question" onclick="toggleFaq('faq-4')">
+                <span>O orçamento é gratuito?</span>
+                <i class="fas fa-chevron-down icon"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Sim! O orçamento é <strong>100% gratuito e sem compromisso</strong>.
+                  Envie as medidas do ambiente pelo WhatsApp ou marque uma visita técnica.
+                  Respondemos em poucas horas.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item" id="faq-5">
+              <button class="faq-question" onclick="toggleFaq('faq-5')">
+                <span>Quais regiões de São Paulo vocês atendem?</span>
+                <i class="fas fa-chevron-down icon"></i>
+              </button>
+              <div class="faq-answer">
+                <p>
+                  Atendemos toda a Capital de São Paulo (Zona Leste, Sul, Oeste, Norte e Centro),
+                  além da Grande SP: ABC (Santo André, São Bernardo, São Caetano, Diadema, Mauá),
+                  Guarulhos e Osasco.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════ FORMULÁRIO DE ORÇAMENTO ═══════════════ -->
+      <section id="contato" style="background:white;">
+        <div class="container">
+          <div class="orcamento-wrap">
+            <div class="orcamento-info">
+              <div class="badge">Atendimento Rápido</div>
+              <h2>Solicite seu Orçamento Gratuito</h2>
+              <p>
+                Preencha o formulário ao lado ou nos chame diretamente no WhatsApp.
+                Nossa equipe retorna em poucos minutos!
+              </p>
+
+              <div class="contact-items">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="contact-link">
+                  <div class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                  <div>
+                    <strong>WhatsApp Comercial</strong>
+                    <span>(11) 94765-1322</span>
+                  </div>
+                </a>
+                <a href="tel:11947651322" class="contact-link">
+                  <div class="contact-icon phone"><i class="fas fa-phone-alt"></i></div>
+                  <div>
+                    <strong>Telefone</strong>
+                    <span>(11) 94765-1322</span>
+                  </div>
+                </a>
+                <div class="contact-link">
+                  <div class="contact-icon location"><i class="fas fa-map-marker-alt"></i></div>
+                  <div>
+                    <strong>Área de Atendimento</strong>
+                    <span>SP Capital e Grande SP</span>
+                  </div>
+                </div>
+              </div>
+
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="margin-top:2rem;">
+                <i class="fab fa-whatsapp"></i> Chamar no WhatsApp Agora
+              </a>
+            </div>
+
+            <div class="orcamento-form">
+              <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form">
+                <input type="hidden" name="access_key" value="7b9cd041-bdd8-49ed-bdbe-e656ac5b0df6" />
+                <input type="hidden" name="subject" value="Novo orçamento solicitado - Pontowall Forros" />
+                <input type="hidden" name="redirect" value="https://pontowallforros.com.br/obrigado" />
+
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="nome">Nome ou Empresa *</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: Construtora Pontal" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="whatsapp">WhatsApp / Telefone *</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 90000-0000" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">E-mail (Opcional)</label>
+                  <input type="email" id="email" name="email" placeholder="contato@suaempresa.com.br" />
+                </div>
+
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="tipo_obra">Tipo de Obra</label>
+                    <select id="tipo_obra" name="tipo_obra">
+                      <option value="Galpão Logístico">Galpão Logístico</option>
+                      <option value="Igreja / Templo">Igreja / Templo</option>
+                      <option value="Supermercado">Supermercado</option>
+                      <option value="Hospital / Clínica">Hospital / Clínica</option>
+                      <option value="Escritório">Escritório</option>
+                      <option value="Residencial">Residencial</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="metragem">Metragem Aproximada</label>
+                    <input type="text" id="metragem" name="metragem" placeholder="Ex: 500m²" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="mensagem">Detalhes do Projeto *</label>
+                  <textarea id="mensagem" name="mensagem" rows="4" placeholder="Descreva brevemente o que você precisa..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:1rem;font-size:1.05rem;">
+                  <i class="fas fa-paper-plane"></i> Solicitar Orçamento Agora
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <Footer />
+
+    <script>
+      // FAQ Accordion
+      function toggleFaq(id: string) {
+        const item = document.getElementById(id);
+        if (!item) return;
+        const isOpen = item.classList.toggle('open');
+        // Fechar outros
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+          if (el.id !== id) el.classList.remove('open');
+        });
+      }
+
+      // Expor globalmente
+      (window as any).toggleFaq = toggleFaq;
+
+      // Smooth scroll para links âncora
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          const href = (anchor as HTMLAnchorElement).getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
+
+  </body>
 </html>
+
+<style>
+  /* ═══ HERO MODERN ═══ */
+  .modern-hero {
+    padding: 6rem 0 4rem;
+    background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(22, 83, 173, 0.1);
+    color: var(--primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+    letter-spacing: -1px;
+  }
+
+  .hero-content h1 span {
+    display: block;
+    color: var(--primary);
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .hero-btn {
+    padding: 1.25rem 2rem;
+    font-size: 1.15rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+    width: fit-content;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero-trust-badges {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .hero-trust-badges i {
+    color: var(--success);
+  }
+
+  .hero-image-wrapper {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  }
+
+  .hero-modern-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .hero-price-tag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: var(--dark);
+    color: white;
+    padding: 1.25rem 2rem;
+    border-radius: 0 24px 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-price-tag span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .hero-price-tag strong {
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--secondary);
+  }
+
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .modern-hero {
+      padding: 4rem 0 2rem;
+    }
+    .hero-subtitle {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modern-hero {
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-content h1 {
+      font-size: 2.3rem;
+    }
+    .hero-subtitle {
+      text-align: center;
+    }
+    .hero-btn {
+      width: 100%;
+    }
+    .hero-trust-badges {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-price-tag {
+      padding: 1rem 1.5rem;
+    }
+    .hero-price-tag strong {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* ═══ DIFERENCIAIS BAR ═══ */
+  .diferenciais-bar {
+    background: var(--primary);
+    padding: 2rem 0;
+  }
+
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+
+  .diff-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: white;
+  }
+
+  .diff-item i {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    flex-shrink: 0;
+  }
+
+  .diff-item strong {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .diff-item span {
+    display: block;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ═══ SOBRE ═══ */
+  .sobre-section { background: white; }
+
+  .sobre-text .badge { margin-bottom: 1rem; }
+
+  .sobre-text h2 { margin-bottom: 1.25rem; }
+
+  .sobre-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  .stat-num {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+
+  .stat-lbl {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+    font-weight: 500;
+  }
+
+  .sobre-img-wrap {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: visible;
+  }
+
+  .sobre-img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .sobre-badge-float {
+    position: absolute;
+    bottom: -1rem;
+    left: -1rem;
+    background: var(--secondary);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ═══ SERVIÇOS ═══ */
+  .servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .servico-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .servico-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: transparent;
+  }
+
+  .servico-card.featured {
+    border: 2px solid var(--primary);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .servico-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(22,83,173,0.08);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+  }
+
+  .servico-card.featured .servico-icon {
+    background: var(--primary);
+    color: white;
+  }
+
+  .servico-badge {
+    position: absolute;
+    top: -0.75rem;
+    left: 1.5rem;
+    background: var(--secondary);
+    color: white;
+    padding: 0.25rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .servico-card h3 { margin: 0; font-size: 1.25rem; }
+
+  .servico-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .servico-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .servico-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+  }
+
+  .servico-list li i {
+    color: var(--success);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* ═══ SEGMENTOS ═══ */
+  .segmentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .segmento-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .segmento-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .segmento-item i {
+    font-size: 2rem;
+    color: var(--primary);
+  }
+
+  .segmento-item span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  /* ═══ DEPOIMENTOS ═══ */
+  .stars {
+    font-size: 1.2rem;
+    color: #f59e0b;
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+  }
+
+  blockquote {
+    font-style: italic;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+    border-left: none;
+    padding: 0;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: auto;
+  }
+
+  .author-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .testimonial-author strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--dark);
+  }
+
+  .testimonial-author span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .google-review-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    color: #1a73e8;
+    font-weight: 600;
+    padding: 0.7rem 1.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    margin-top: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    font-size: 0.92rem;
+    transition: var(--transition);
+  }
+
+  .google-review-btn i { color: #ea4335; }
+
+  .google-review-btn:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    color: #1a73e8;
+  }
+
+  /* ═══ BLOG CARDS ═══ */
+  .blog-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: transparent;
+  }
+
+  .blog-card-img {
+    height: 200px;
+    overflow: hidden;
+    background: var(--bg-gray);
+  }
+
+  .blog-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform 0.5s ease;
+  }
+
+  .blog-card:hover .blog-card-img img {
+    transform: scale(1.05);
+  }
+
+  .blog-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .blog-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-title {
+    font-size: 1.05rem;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .blog-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-read-more {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition);
+  }
+
+  .blog-card:hover .blog-read-more {
+    gap: 0.7rem;
+  }
+
+  /* ═══ FAQ ═══ */
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* ═══ ORÇAMENTO FORM ═══ */
+  .orcamento-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .orcamento-info .badge { margin-bottom: 1rem; }
+  .orcamento-info h2 { margin-bottom: 1rem; }
+  .orcamento-info > p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: var(--transition);
+  }
+
+  .contact-link:hover {
+    transform: translateX(4px);
+    color: var(--dark);
+  }
+
+  .contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .contact-icon.whatsapp { background: rgba(37,211,102,0.12); color: var(--success); }
+  .contact-icon.phone { background: rgba(22,83,173,0.1); color: var(--primary); }
+  .contact-icon.location { background: rgba(255,107,0,0.1); color: var(--secondary); }
+
+  .contact-link strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark);
+  }
+
+  .contact-link span {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .orcamento-form {
+    background: var(--bg-light);
+    padding: 2.5rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width: 1100px) {
+    .servicos-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero-price-card { display: none; }
+
+    .diff-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 { grid-template-columns: 1fr; }
+    .sobre-img { height: 320px; }
+
+    .orcamento-wrap {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero { min-height: 80vh; }
+
+    .hero-title-main { font-size: clamp(2.5rem, 10vw, 4rem); }
+
+    .servicos-grid { grid-template-columns: 1fr; }
+
+    .diff-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .sobre-stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-ctas { flex-direction: column; }
+    .hero-trust { flex-direction: column; gap: 0.75rem; }
+    .diff-grid { grid-template-columns: 1fr 1fr; }
+    .orcamento-form { padding: 1.5rem; }
+  }
+</style>
